@@ -37,7 +37,7 @@ export default async function handler(
     return res.status(405).json({ message: "405 Method Not Allowed" });
   }
 
-  const email = req.query.email as string;
+  const email = req.query.domain as string;
   if (!email) return res.status(400).json({ message: "Please provide email" });
   const domain = extractDomain(email);
   const disposable = [...list, ...newlist].includes(domain);
