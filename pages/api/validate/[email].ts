@@ -4,8 +4,8 @@ import disposable from "disposable-email-domains";
 const dnscache = require("dnscache");
 import dns from "dns";
 import fs from "fs";
-import list from "../../data/list.json";
-import newlist from "../../data/newlist.json";
+import list from "../../../data/list.json";
+import newlist from "../../../data/newlist.json";
 import extractDomain from "extract-domain";
 
 async function dns_checker(domain: any): Promise<boolean> {
@@ -37,7 +37,7 @@ export default async function handler(
     return res.status(405).json({ message: "405 Method Not Allowed" });
   }
 
-  const email = req.body.email as string;
+  const email = req.query.email as string;
   if (!email) return res.status(400).json({ message: "Please provide email" });
   const domain = extractDomain(email);
   const disposable = [...list, ...newlist].includes(domain);
